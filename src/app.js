@@ -10,6 +10,8 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// viendo cambios en el repositorio
+
 
 
 const db = firebase.firestore();
