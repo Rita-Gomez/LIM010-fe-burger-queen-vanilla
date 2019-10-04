@@ -1,4 +1,6 @@
-import { components } from '../view/index.js';
+import { components } from '../vistas/index.js';
+
+
 
 
 export const changeTmp = (hash) => {
