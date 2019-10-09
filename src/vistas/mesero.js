@@ -83,11 +83,13 @@ export default () => {
             snapshot.docs.forEach(doc => {
                 box.innerHTML += `<button class="btnProducto" data-set="${doc.id}">
                 <p>${doc.data().producto}</p>
-                <p>${doc.data().precio}</p>
+                <p>$${doc.data().precio}</p>
+                
+                <p>${doc.data().Sabores && doc.data().Sabores.map((elem) => `<p>${elem.producto}</p>`)}</p>
                 <img class="fotoDesayuno" src="${doc.data().img}">
-                </button>`;
-            });
-            
+                </button>`;    
+                }
+            ); 
         })
         .catch(()=> console.log('error'));
     })
