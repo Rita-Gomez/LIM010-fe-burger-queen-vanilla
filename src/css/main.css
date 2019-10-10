@@ -22,7 +22,7 @@ body {
 
 #containerIzquierdo {
     background: #ffd800;
-    height: 800px;
+    height: 900px;
     width: 2000px;
 }
 
@@ -144,7 +144,7 @@ h3 {
 .title {
     transform: rotate(90deg);
     flex: none;
-    margin-left: 75%;
+    margin-left: 90%;
     margin-top: 117%;
     text-transform: uppercase;
     color: #fff;
@@ -172,22 +172,22 @@ h3 {
 
 .nuevoFlex {
     background-color: #ffd800;
-    height: 800px;
-    width: 450px;
+    height: 900px;
+    width: 550px;
     background-position: center;
 }
 
 .nuevoGrupo {
     background-color: #545760;
-    height: 800px;
-    width: 450px;
+    height: 900px;
+    width: 550px;
     background-position: center;
 }
 
 #containerCentral {
     background-color: #464952;
-    height: 800px;
-    width: 450px;
+    height: 900px;
+    width: 550px;
 }
 
 .childFlex,
@@ -304,5 +304,6 @@ button.btnProducto {
 }
 
 .fotoDesayuno {
-    width: 100%;
+    width: 50%;
+    height: 100px;
 }

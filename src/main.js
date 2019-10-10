@@ -1,5 +1,5 @@
 // Este es el punto de entrada de tu aplicacion
-import { changeTmp } from './controller/router.js';
+import { changeTmp } from './controlador-rutas/router.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD7TzcqH3cAYICbZYTVAR6-s1f8uhwrdrw",
