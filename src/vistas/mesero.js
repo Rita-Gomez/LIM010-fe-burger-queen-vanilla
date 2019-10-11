@@ -1,6 +1,6 @@
 import { verDataFb } from "../controlador-firebase/controlador-fb.js";
-import { templates } from "../vistas/productos.js";
-import { btnPadre } from "../vistas/productos.js";
+import { templates } from "../controlador-rutas/productos.js";
+
 export default () => {
     const viewCatalogue = `
   <section id="perifericoDerecho">
@@ -33,17 +33,12 @@ export default () => {
                     <table id="tblDatos">
                         <thead>
                             <tr>
-                                <th id="producto">Producto</th>
-                                <th id="precio">Precio</th>
-                                <th id="cantidad">Cantidad</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                               
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td id="productos"></td>
-                                <td id="precios"></td>
-                                <td id="cantidades"></td>
-                            </tr>
+                        <tbody id="contenedor-tabla">
                         </tbody>
                     </table>
                 </div>
@@ -58,27 +53,21 @@ export default () => {
     const desayuno = divElement.querySelector('#btnDesayuno');
     desayuno.addEventListener('click', () => {
         const box = document.getElementById('containerCentral');
-        box.innerHTML= '';
+        box.innerHTML = '';
         verDataFb('Desayuno')
-            .then((snapshot) => {
+        .then((snapshot) => {
                 snapshot.docs.forEach(doc => {
-                      box.appendChild(templates(doc)) ;
+                      box.appendChild(templates(doc));
                 });
-                
             })
             .catch(()=> console.log('error'));
-    
         })
      
-        btnPadre.addEventListener('click', (event)=>{
-         const y = event.target.id;
-         console.log(y) 
-        })
-
         const almuerzo = divElement.querySelector('#btnAlmuerzo');
         almuerzo.addEventListener('click', () => {
             const box = document.getElementById('containerCentral');
-        verDataFb('Menú')
+            box.innerHTML= '';
+            verDataFb('Menú')
         .then((snapshot) => {
             snapshot.docs.forEach(doc => {
               box.appendChild(templates(doc));    
@@ -87,7 +76,5 @@ export default () => {
         })
         .catch(()=> console.log('error'));
     })
-   
-
     return divElement;
 };
