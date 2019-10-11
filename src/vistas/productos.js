@@ -1,6 +1,6 @@
 export  const templates = (doc)=> {
  export const btnPadre = document.createElement('button');
-  btnPadre.className = 'btnProducto'
+  btnPadre.className = 'btnProductos'
   btnPadre.setAttribute('data-id', doc.id );
 
   const temp =`
