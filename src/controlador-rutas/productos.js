@@ -1,4 +1,4 @@
-
+import {btnInformacion} from "../controlador-rutas/boton.js";
 let arr = [];
 export const templates = (doc) => {
   const btnPadre = document.createElement('button');
@@ -12,24 +12,46 @@ export const templates = (doc) => {
   `;
   btnPadre.innerHTML = temp;
 
+
+
+
   btnPadre.addEventListener('click', () => {
-    const template2 = `
-    <tr>
-     <td id="productos">${doc.data().producto}</td>
-     <td id="precios">${doc.data().precio}</td> 
-     <td><button id="btn-eliminar">Eliminar</button></td>               
-    </tr>
-          `;
- const box1 = document.getElementById('contenedor-tabla');
- box1.innerHTML += template2;
+    const obj = {
+      productoId : doc.id,
+      nombreProducto: doc.data().producto,
+      precio : doc.data().precio,
+      cantidad : 1,
+    }
+
+
+  const metodoFind = arr.find(eleId=>eleId.productoId===obj.productoId) ;
+    
+  if(!metodoFind){
+    arr.push(obj);
+   localStorage.setItem('ordenes', JSON.stringify(arr));
+  } else if(metodoFind) {
+    obj.cantidad++;
+    arr.push(obj);
+    // localStorage.setItem('ordenes', JSON.stringify(arr));
+  }
+      
+    
+   
+  
+
+
+
+
+
+
+    // arr.push(obj);
+    // const arrStorage = (localStorage.setItem('ordenes', JSON.stringify(arr)));
+    // console.log(arr)
+  btnInformacion(doc);
+
+
  
- const obj ={
-  producto : doc.data().producto,
-  precio : doc.data().precio,
-}
-arr.push(obj);
-const arrStorage = (localStorage.setItem('ordenes', JSON.stringify(arr)));
-console.log(arr)
+
 });
   return btnPadre;
 };
