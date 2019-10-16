@@ -1,5 +1,6 @@
 import {btnInformacion} from "../controlador-rutas/boton.js";
 let arr = [];
+
 export const templates = (doc) => {
   const btnPadre = document.createElement('button');
   btnPadre.className = 'btnProductos'
@@ -13,8 +14,6 @@ export const templates = (doc) => {
   btnPadre.innerHTML = temp;
 
 
-
-
   btnPadre.addEventListener('click', () => {
     const obj = {
       productoId : doc.id,
@@ -24,34 +23,25 @@ export const templates = (doc) => {
     }
 
 
+
   const metodoFind = arr.find(eleId=>eleId.productoId===obj.productoId) ;
     
   if(!metodoFind){
     arr.push(obj);
+    btnInformacion(doc);
    localStorage.setItem('ordenes', JSON.stringify(arr));
   } else if(metodoFind) {
     obj.cantidad++;
-    arr.push(obj);
-    // localStorage.setItem('ordenes', JSON.stringify(arr));
-  }
-      
-    
-   
   
-
-
-
-
-
-
-    // arr.push(obj);
-    // const arrStorage = (localStorage.setItem('ordenes', JSON.stringify(arr)));
-    // console.log(arr)
-  btnInformacion(doc);
-
-
- 
+  }
+   localStorage.setItem('ordenes', JSON.stringify(arr));     
+   
 
 });
   return btnPadre;
 };
+// JSON.parse(localStorage.getItem('ordenes')).forEach(ele=>{
+//   btnInformacion(ele);
+//   console.log(ele);
+//  });
+
