@@ -22,7 +22,7 @@ body {
 
 #containerIzquierdo {
     background: #ffd800;
-    height: 900px;
+    height: 800px;
     width: 2000px;
 }
 
@@ -144,7 +144,7 @@ h3 {
 .title {
     transform: rotate(90deg);
     flex: none;
-    margin-left: 90%;
+    margin-left: 75%;
     margin-top: 117%;
     text-transform: uppercase;
     color: #fff;
@@ -172,22 +172,22 @@ h3 {
 
 .nuevoFlex {
     background-color: #ffd800;
-    height: 900px;
-    width: 550px;
+    height: 800px;
+    width: 450px;
     background-position: center;
 }
 
 .nuevoGrupo {
     background-color: #545760;
-    height: 900px;
-    width: 550px;
+    height: 800px;
+    width: 450px;
     background-position: center;
 }
 
 #containerCentral {
     background-color: #464952;
-    height: 900px;
-    width: 550px;
+    height: 800px;
+    width: 450px;
 }
 
 .childFlex,
@@ -293,17 +293,21 @@ td#cantidad {
     background: transparent;
 }
 
-button.btnProducto {
+p {
+    color: white;
+}
+
+button.btnProductos {
     width: 190px;
     margin-left: 25px;
     margin-top: 100px;
-    background-color: #fefefe;
-    border: none;
+    background-color: #464952;
     border-radius: 10%;
     cursor: pointer;
+    border: 1px solid #f5f5f5;
 }
 
 .fotoDesayuno {
-    width: 50%;
-    height: 100px;
+    /* width: 140px; */
+    height: 70px;
 }

@@ -1,4 +1,3 @@
-
 export const btnInformacion = (doc) => { 
 console.log(doc)
   const btnPintar = document.createElement('tr');
@@ -26,3 +25,4 @@ const metodoSplice = x.splice (indice, 1)
 });
 
 };
+

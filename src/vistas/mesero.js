@@ -35,7 +35,7 @@ export default () => {
                             <tr>
                                 <th>Producto</th>
                                 <th>Precio</th>
-                               
+
                             </tr>
                         </thead>
                         <tbody id="contenedor-tabla">

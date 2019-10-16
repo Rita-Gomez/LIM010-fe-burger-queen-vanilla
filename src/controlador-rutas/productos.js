@@ -13,6 +13,7 @@ export const templates = (doc) => {
   `;
   btnPadre.innerHTML = temp;
 
+
   btnPadre.addEventListener('click', () => {
     const obj = {
       productoId : doc.id,
@@ -21,23 +22,24 @@ export const templates = (doc) => {
       cantidad : 1,
     }
 
-   const metodoFind = arr.find(eleId=>eleId.productoId===obj.productoId) ;
+
+
+  const metodoFind = arr.find(eleId=>eleId.productoId===obj.productoId) ;
+    
   if(!metodoFind){
     arr.push(obj);
-    btnInformacion(obj);
-  } else  {
-    metodoFind.cantidad++;
+    btnInformacion(doc);
+   localStorage.setItem('ordenes', JSON.stringify(arr));
+  } else if(metodoFind) {
+    obj.cantidad++;
   
-    
   }
-  
-  localStorage.setItem('ordenes', JSON.stringify(arr));  
-
+   localStorage.setItem('ordenes', JSON.stringify(arr));     
+   
 
 });
   return btnPadre;
 };
-
 // JSON.parse(localStorage.getItem('ordenes')).forEach(ele=>{
 //   btnInformacion(ele);
 //   console.log(ele);
