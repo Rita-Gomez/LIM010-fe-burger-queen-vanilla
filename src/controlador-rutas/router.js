@@ -1,4 +1,8 @@
-import { components } from '../controlador-rutas/index.js';
+import { components } from '../vistas/index.js';
+
+
+
+
 export const changeTmp = (hash) => {
     const sectionMain = document.getElementById('container');
     sectionMain.innerHTML = '';
