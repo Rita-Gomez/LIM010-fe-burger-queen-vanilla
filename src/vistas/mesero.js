@@ -50,7 +50,6 @@ export default () => {
     const divElement = document.createElement('section');
     divElement.className = "body";
     divElement.innerHTML = viewCatalogue;
-
     const btnName = divElement.querySelector('#btnOk');
     btnName.addEventListener('click', () => {
         const input = document.getElementById('inputTexto').value;

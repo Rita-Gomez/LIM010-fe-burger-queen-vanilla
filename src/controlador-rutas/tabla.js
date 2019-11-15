@@ -1,4 +1,5 @@
 import { arrProducto } from "../controlador-rutas/funciones.js";
+import { guardarPedidos } from '../controlador-firebase/controlador-fb.js'
 let sumaTotal = 0
 export const btnDatos = (doc) => {
   const btnPintardato = document.createElement('tr');
@@ -21,6 +22,7 @@ export const btnDatos = (doc) => {
     removeLocalStorage(arrProducto, even);
     btnTotal(sumaTotal -= subtotal);
   });
+  
 };
 
 
@@ -36,10 +38,26 @@ export const btnTotal = () => {
   const box2 = document.querySelector('#total');
   box2.innerHTML = '';
   box2.appendChild(btnPintartotal);
+
+  const btnAgregar = btnPintartotal.querySelector('.btnEnviar');
+  btnAgregar.addEventListener('click',()=>{
+    guardarPedidos({arrProducto});
+    const box1 = document.querySelector('#containerTabla');
+    box1.innerHTML = '';
+    const box2 = document.querySelector('#total');
+    box2.innerHTML = '';
+  
+    localStorage.removeItem('ordenes');
+  })
+
 }
+
+
+
 const removeLocalStorage = (arrP, index) => {
    
   arrP = JSON.parse(localStorage.getItem('ordenes'));
   arrP.splice(index, 1);
+  console.log(arrP)
   localStorage.setItem('ordenes', JSON.stringify(arrP));
 }
