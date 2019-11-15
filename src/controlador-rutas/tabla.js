@@ -1,12 +1,12 @@
 import { arrProducto } from "../controlador-rutas/funciones.js";
 import { guardarPedidos } from '../controlador-firebase/controlador-fb.js'
 let sumaTotal = 0
-export const btnDatos = (doc) => {
+export const Datos = (doc) => {
   const btnPintardato = document.createElement('tr');
   btnPintardato.innerHTML +=
     `<td id="productos">${doc.producto}</td>
           <td id="precios">s/.${doc.precio}</td>
-          <td><p class="colour">${doc.cantidad}</p></td> 
+          <td>${doc.cantidad}</td> 
           <td><button class="btnEliminar" id="${doc.id}">X</button></td>`;
   const box1 = document.querySelector('#containerTabla');
   box1.appendChild(btnPintardato);
@@ -20,14 +20,14 @@ export const btnDatos = (doc) => {
     const even = event.target.id;
     box1.removeChild(btnPintardato);
     removeLocalStorage(arrProducto, even);
-    btnTotal(sumaTotal -= subtotal);
+    Total(sumaTotal -= subtotal);
   });
   
 };
 
 
 
-export const btnTotal = () => {
+export const Total = () => {
 
   const btnPintartotal = document.createElement('tr');
   btnPintartotal.innerHTML =
@@ -46,18 +46,15 @@ export const btnTotal = () => {
     box1.innerHTML = '';
     const box2 = document.querySelector('#total');
     box2.innerHTML = '';
-  
     localStorage.removeItem('ordenes');
   })
 
 }
 
 
-
+// FUNCION PARA ELIMINAR PRODUCTO
 const removeLocalStorage = (arrP, index) => {
-   
   arrP = JSON.parse(localStorage.getItem('ordenes'));
   arrP.splice(index, 1);
-  console.log(arrP)
   localStorage.setItem('ordenes', JSON.stringify(arrP));
 }

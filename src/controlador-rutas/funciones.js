@@ -1,6 +1,6 @@
 import {
-    btnDatos,
-    btnTotal
+    Datos,
+    Total
 } from "../controlador-rutas/tabla.js";
 let arr = [];
 let obj = {
@@ -107,7 +107,7 @@ export const templates = (doc) => {
     }
    
 
- //---------------
+ //--------BOTONES PRODUCTOS 
     btnBoton.addEventListener('click', (e) => {
         const obj = {
             id: doc.id,
@@ -124,12 +124,14 @@ export const templates = (doc) => {
     
         } else if (!metodoFind) {
             arr.push(obj);
-            btnDatos(obj);
-            btnTotal(obj);
+            // DATOS PINTA EL PRODUCTO EN TABLA
+            Datos(obj);
+
+            Total(obj);
         } else {
             metodoFind.cantidad++;
-            btnDatos(metodoFind);
-            btnTotal(metodoFind);
+            Datos(metodoFind);
+            Total(metodoFind);
         }
             localStorage.setItem('ordenes', JSON.stringify(arr));
     });
