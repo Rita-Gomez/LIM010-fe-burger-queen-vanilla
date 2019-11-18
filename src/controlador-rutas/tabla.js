@@ -1,4 +1,4 @@
-import { arrProducto } from "../controlador-rutas/funciones.js";
+import { arrProducto,arr } from "../controlador-rutas/funciones.js";
 import { guardarPedidos } from '../controlador-firebase/controlador-fb.js'
 let sumaTotal = 0
 //

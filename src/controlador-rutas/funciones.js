@@ -1,7 +1,6 @@
 import { templateOrders, templateTotal} from "../controlador-rutas/tabla.js";
 import {adicionales} from '../controlador-rutas/adicionales.js'
 export let arr = [];
-export const arrProducto = JSON.parse(localStorage.getItem('ordenes', JSON.stringify(arr)));
 
 export const templateProducts = (doc) => {
 
@@ -55,6 +54,7 @@ export const templateProducts = (doc) => {
     return btnProducts;
 };
 
+export const arrProducto  =  (localStorage.getItem(arr) ? JSON.parse(localStorage.getItem(arr)) : []);
 
 
 

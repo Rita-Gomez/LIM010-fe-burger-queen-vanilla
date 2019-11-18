@@ -77,8 +77,8 @@ const btnAdicional = containerBurger.querySelectorAll('.adicional');
     arr.push(nuevoObj);
     templateOrders(nuevoObj);
     templateTotal(nuevoObj);
-    obj.adicional=[]
-    console.log(obj.adicional)
+    // obj.adicional=[]
+    // console.log(obj.adicional)
     
 
  })
