@@ -7,6 +7,7 @@ let obj = {
     sabor: null,
     adicional: []
 };
+export const arrProducto = JSON.parse(localStorage.getItem('ordenes', JSON.stringify(arr)));
 
 export const templates = (doc) => {
     const btnBoton = document.createElement('button');
@@ -18,6 +19,7 @@ export const templates = (doc) => {
     <p>S/. ${doc.data().precio}</p>
     `;
     btnBoton.innerHTML = temp;
+
     // TEMPLATE SABORES AD.
     const sabores = (doc)=> {
       const btnAdi = document.createElement('div');
@@ -116,22 +118,24 @@ export const templates = (doc) => {
             cantidad: 1,
         }
         const metodoFind = arr.find(eleId => eleId.id === obj.id);
-        console.log(metodoFind);
-
+       
         if (doc.data().sabores) {
        sabores(doc, e.target);
  
-    
         } else if (!metodoFind) {
             arr.push(obj);
             // DATOS PINTA EL PRODUCTO EN TABLA
-            Datos(obj);
-
+            Datos(arrProducto);
             Total(obj);
+
         } else {
+
             metodoFind.cantidad++;
-            Datos(metodoFind);
-            Total(metodoFind);
+            Datos(arrProducto);
+            // Total(metodoFind);
+          
+
+
         }
             localStorage.setItem('ordenes', JSON.stringify(arr));
     });
@@ -140,4 +144,5 @@ export const templates = (doc) => {
 
 
 
-export const arrProducto = JSON.parse(localStorage.getItem('ordenes', JSON.stringify(arr)));
+
+

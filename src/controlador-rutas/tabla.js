@@ -1,14 +1,27 @@
 import { arrProducto } from "../controlador-rutas/funciones.js";
 import { guardarPedidos } from '../controlador-firebase/controlador-fb.js'
 let sumaTotal = 0
-export const Datos = (doc) => {
+export const Datos = (arrobj) => {
+  console.log(arrobj)
   const btnPintardato = document.createElement('tr');
-  btnPintardato.innerHTML +=
-    `<td id="productos">${doc.producto}</td>
-          <td id="precios">s/.${doc.precio}</td>
-          <td>${doc.cantidad}</td> 
-          <td><button class="btnEliminar" id="${doc.id}">X</button></td>`;
   const box1 = document.querySelector('#containerTabla');
+  // box1.innerHTML = '';
+  arrobj.forEach(doc => {
+    btnPintardato.innerHTML +=
+    `<td id="productos">${doc.producto}</td>
+    <td id="precios">s/.${doc.precio}</td>
+    <td>${doc.cantidad}</td> 
+    <td><button class="btnEliminar" id="${doc.id}">X</button></td>`;
+
+  // const btnPintardato = document.createElement('tr');
+  // const box1 = document.querySelector('#containerTabla');
+  // box1.innerHTML = '';
+  // btnPintardato.innerHTML +=
+  //   `<td id="productos">${doc.producto}</td>
+  //         <td id="precios">s/.${doc.precio}</td>
+  //         <td>${doc.cantidad}</td> 
+  //         <td><button class="btnEliminar" id="${doc.id}">X</button></td>`;
+  
   box1.appendChild(btnPintardato);
   
   const subtotal = doc.precio * doc.cantidad
@@ -22,7 +35,7 @@ export const Datos = (doc) => {
     removeLocalStorage(arrProducto, even);
     Total(sumaTotal -= subtotal);
   });
-  
+});
 };
 
 
