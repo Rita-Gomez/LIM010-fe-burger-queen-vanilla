@@ -1,16 +1,20 @@
 import { arrProducto } from "../controlador-rutas/funciones.js";
 import { guardarPedidos } from '../controlador-firebase/controlador-fb.js'
 let sumaTotal = 0
-export const Datos = (doc) => {
+//
+export const btnDatos = (doc) => {
+
   const btnPintardato = document.createElement('tr');
   btnPintardato.innerHTML +=
     `<td id="productos">${doc.producto}</td>
           <td id="precios">s/.${doc.precio}</td>
-          <td>${doc.cantidad}</td> 
+
+          <td><p class="colour">${doc.cantidad}</p></td> 
           <td><button class="btnEliminar" id="${doc.id}">X</button></td>`;
   const box1 = document.querySelector('#containerTabla');
   box1.appendChild(btnPintardato);
-  
+  console.log(box1)
+
   const subtotal = doc.precio * doc.cantidad
   
   sumaTotal += subtotal
@@ -20,14 +24,18 @@ export const Datos = (doc) => {
     const even = event.target.id;
     box1.removeChild(btnPintardato);
     removeLocalStorage(arrProducto, even);
-    Total(sumaTotal -= subtotal);
+
+    btnTotal(sumaTotal -= subtotal);
+
   });
   
 };
 
 
 
-export const Total = () => {
+
+export const btnTotal = () => {
+
 
   const btnPintartotal = document.createElement('tr');
   btnPintartotal.innerHTML =
@@ -38,23 +46,27 @@ export const Total = () => {
   const box2 = document.querySelector('#total');
   box2.innerHTML = '';
   box2.appendChild(btnPintartotal);
+                                              
+  const btnEnviar = btnPintartotal.querySelector('.btnEnviar');
+  btnEnviar.addEventListener('click',()=>{
 
-  const btnAgregar = btnPintartotal.querySelector('.btnEnviar');
-  btnAgregar.addEventListener('click',()=>{
     guardarPedidos({arrProducto});
     const box1 = document.querySelector('#containerTabla');
     box1.innerHTML = '';
     const box2 = document.querySelector('#total');
     box2.innerHTML = '';
+
     localStorage.removeItem('ordenes');
   })
 
 }
 
 
+
 // FUNCION PARA ELIMINAR PRODUCTO
 const removeLocalStorage = (arrP, index) => {
   arrP = JSON.parse(localStorage.getItem('ordenes'));
   arrP.splice(index, 1);
+
   localStorage.setItem('ordenes', JSON.stringify(arrP));
 }
