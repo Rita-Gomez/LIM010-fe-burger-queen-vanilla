@@ -2,7 +2,7 @@ import {
   verDataFb
 } from "../controlador-firebase/controlador-fb.js";
 import {
-  templates
+ templateProducts
 } from "../controlador-rutas/funciones.js";
 export default () => {
   const viewCatalogue = `
@@ -69,7 +69,7 @@ export default () => {
     verDataFb('Desayuno')
       .then((snapshot) => {
         snapshot.docs.forEach(doc => {
-          box.appendChild(templates(doc));
+          box.appendChild(templateProducts(doc));
         });
 
       })
@@ -82,7 +82,7 @@ export default () => {
     verDataFb('Menú')
       .then((snapshot) => {
         snapshot.docs.forEach(doc => {
-          box.appendChild(templates(doc));
+          box.appendChild(templateProducts(doc));
 
         });
       })
