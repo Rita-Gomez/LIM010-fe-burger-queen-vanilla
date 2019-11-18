@@ -1,31 +1,20 @@
 import { arrProducto } from "../controlador-rutas/funciones.js";
 import { guardarPedidos } from '../controlador-firebase/controlador-fb.js'
 let sumaTotal = 0
-export const Datos = (arrobj) => {
-  console.log(arrobj)
+//
+export const btnDatos = (doc) => {
   const btnPintardato = document.createElement('tr');
+  btnPintardato.innerHTML += `
+  <td id="productos">${doc.producto}</td>
+          <td id="precios">s/.${doc.precio}</td>
+          <td><p class="colour">${doc.cantidad}</p></td> 
+          <td><button class="btnEliminar" id="${doc.id}">X</button></td>
+  `
+    ;
   const box1 = document.querySelector('#containerTabla');
-  // box1.innerHTML = '';
-  arrobj.forEach(doc => {
-    btnPintardato.innerHTML +=
-    `<td id="productos">${doc.producto}</td>
-    <td id="precios">s/.${doc.precio}</td>
-    <td>${doc.cantidad}</td> 
-    <td><button class="btnEliminar" id="${doc.id}">X</button></td>`;
-
-  // const btnPintardato = document.createElement('tr');
-  // const box1 = document.querySelector('#containerTabla');
-  // box1.innerHTML = '';
-  // btnPintardato.innerHTML +=
-  //   `<td id="productos">${doc.producto}</td>
-  //         <td id="precios">s/.${doc.precio}</td>
-  //         <td>${doc.cantidad}</td> 
-  //         <td><button class="btnEliminar" id="${doc.id}">X</button></td>`;
-  
   box1.appendChild(btnPintardato);
-  
   const subtotal = doc.precio * doc.cantidad
-  
+
   sumaTotal += subtotal
 
   const btnEliminar = btnPintardato.querySelector('.btnEliminar');
@@ -33,41 +22,46 @@ export const Datos = (arrobj) => {
     const even = event.target.id;
     box1.removeChild(btnPintardato);
     removeLocalStorage(arrProducto, even);
-    Total(sumaTotal -= subtotal);
+    btnTotal(sumaTotal -= subtotal);
   });
-});
+
 };
 
 
 
-export const Total = () => {
+export const btnTotal = () => {
 
   const btnPintartotal = document.createElement('tr');
-  btnPintartotal.innerHTML =
-    ` <td>TOTAL:</td>
+  btnPintartotal.innerHTML = `
+  <td>TOTAL:</td>
        <td>s/${sumaTotal}.00</td>
        <td></td>
-       <td><button class = "btnEnviar">Enviar</button></td>`;
+       <td><button class = "btnEnviar">Enviar</button></td>
+  `
+     ;
   const box2 = document.querySelector('#total');
   box2.innerHTML = '';
   box2.appendChild(btnPintartotal);
 
-  const btnAgregar = btnPintartotal.querySelector('.btnEnviar');
-  btnAgregar.addEventListener('click',()=>{
+  const btnEnviar = btnPintartotal.querySelector('.btnEnviar');
+  btnEnviar.addEventListener('click',()=>{
     guardarPedidos({arrProducto});
     const box1 = document.querySelector('#containerTabla');
     box1.innerHTML = '';
     const box2 = document.querySelector('#total');
     box2.innerHTML = '';
+
     localStorage.removeItem('ordenes');
   })
 
 }
 
 
-// FUNCION PARA ELIMINAR PRODUCTO
+
 const removeLocalStorage = (arrP, index) => {
+
   arrP = JSON.parse(localStorage.getItem('ordenes'));
   arrP.splice(index, 1);
+  console.log(arrP)
   localStorage.setItem('ordenes', JSON.stringify(arrP));
 }

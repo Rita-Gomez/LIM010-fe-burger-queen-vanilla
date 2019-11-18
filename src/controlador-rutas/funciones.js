@@ -1,6 +1,7 @@
 import {
-    Datos,
-    Total
+    btnDatos,
+    btnTotal
+
 } from "../controlador-rutas/tabla.js";
 let arr = [];
 let obj = {
@@ -17,6 +18,7 @@ export const templates = (doc) => {
     const temp = `<img class="fotoDesayuno" src="${doc.data().img}">
     <p>${doc.data().producto}</p>
     <p>S/. ${doc.data().precio}</p>
+
     `;
     btnBoton.innerHTML = temp;
 
@@ -56,7 +58,7 @@ export const templates = (doc) => {
    
  
      const btnSabores = box.querySelectorAll('.sabor');
-     
+
     btnSabores.forEach(elemen =>{
         elemen.addEventListener('click', (e) =>{ 
         //    console.log( obj.sabor = e.target.dataset.sabor);
@@ -68,12 +70,14 @@ export const templates = (doc) => {
     const btnAdicional = box.querySelectorAll('.adicional');
         btnAdicional.forEach(elemen =>{   
            elemen.addEventListener('click', (e) => {
-         obj.adicional.push( e.target.dataset.adicional);
-     
+
+                obj.adicional.push(e.target.dataset.adicional) ;
+
              });
         })
     
         const btnAgregar = box.querySelector('.agregar');
+
      btnAgregar.addEventListener('click', () =>{   
         const nuevoObj =  {
             id: doc.id,
@@ -83,33 +87,24 @@ export const templates = (doc) => {
             sabor : obj.sabor,
             adicional: obj.adicional
         }
-        // const adicionando = nuevoObj.adicional.length =1 ? 
-        //  nuevoObj.precio = parseInt(doc.data().precio) +1 :   nuevoObj.precio = parseInt(doc.data().precio) +2;
+      
+        nuevoObj.precio = parseInt(doc.data().precio) + nuevoObj.adicional.length ;
+        console.log(nuevoObj, 'pedido')
+        arr.push(nuevoObj);
+        btnDatos(nuevoObj)
+        btnTotal(nuevoObj);
+        obj.adicional = [];
+        console.log(obj.adicional)
         
-        nuevoObj.precio = nuevoObj.adicional.length + parseInt(doc.data().precio);
-        console.log(nuevoObj)
-        
-        /* if(nuevoObj.adicional.length>0){
-            nuevoObj.precio = parseInt(doc.data().precio) +1 ;
-            arr.push(nuevoObj)
-            btnDatos(nuevoObj);
-            btnTotal(nuevoObj);
-        }else if (nuevoObj.adicional.length<=1){
 
-            console.log('adicional')
-            // nuevoObj.precio = parseInt(doc.data().precio) +2;
-            // btnDatos(nuevoObj);
-            // btnTotal(nuevoObj);
-        }else{
-            console.log('no hay adicional')
-        } */
-     
      })
 
     }
    
 
+
  //--------BOTONES PRODUCTOS 
+
     btnBoton.addEventListener('click', (e) => {
         const obj = {
             id: doc.id,
@@ -118,26 +113,26 @@ export const templates = (doc) => {
             cantidad: 1,
         }
         const metodoFind = arr.find(eleId => eleId.id === obj.id);
-       
         if (doc.data().sabores) {
        sabores(doc, e.target);
  
         } else if (!metodoFind) {
             arr.push(obj);
-            // DATOS PINTA EL PRODUCTO EN TABLA
-            Datos(arrProducto);
-            Total(obj);
 
+         
+            btnDatos(obj);
+            console.log(btnDatos)
+
+            btnTotal(obj);
         } else {
 
             metodoFind.cantidad++;
-            Datos(arrProducto);
-            // Total(metodoFind);
-          
-
-
+            btnDatos(metodoFind)
+            btnTotal(metodoFind);
         }
             localStorage.setItem('ordenes', JSON.stringify(arr));
+         
+
     });
     return btnBoton;
 };
