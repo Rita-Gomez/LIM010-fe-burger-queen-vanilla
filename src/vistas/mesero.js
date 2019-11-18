@@ -1,5 +1,5 @@
 import { verDataFb } from "../controlador-firebase/controlador-fb.js";
-
+import { templates } from "../controlador-rutas/funciones.js";
 export default () => {
     const viewCatalogue = `
   <section id="perifericoDerecho">
@@ -10,7 +10,7 @@ export default () => {
                     <div id="imagenMenu"><img src="./img/menu.png"/></div>
                     <div class="linkFoods">
                         <div class="botonName">
-                            <input type="text" class="inputTexto" placeholder="Nombre cliente">
+                            <input type="text" class="inputTexto" id="inputTexto" placeholder="Nombre cliente">
                             <button id="btnOk">→</button>
                         </div>
                         <button id="btnDesayuno" class="breakfast">Desayuno</button>
@@ -26,24 +26,21 @@ export default () => {
     <section id="perifericoIzquierdo">
         <div class="nuevoFlex">
             <div class="childFlex">
-                <a href="#" class="verListado">Ver Pedidos</a>
+                <a href="#" class="verListado"></a>
                 <div id="containerExtremoIzquierdo">
-                    <h2 id="cliente">Cliente :</h2>
+                    <h2 id="cliente">Cliente : </h2>
                     <table id="tblDatos">
                         <thead>
                             <tr>
-                                <th id="producto">Producto</th>
-                                <th id="precio">Precio</th>
-                                <th id="cantidad">Cantidad</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td id="producto"></td>
-                                <td id="precio"></td>
-                                <td id="cantidad"></td>
-                            </tr>
+                        <tbody id="containerTabla">
                         </tbody>
+                        <tfoot id="total">
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -53,45 +50,41 @@ export default () => {
     const divElement = document.createElement('section');
     divElement.className = "body";
     divElement.innerHTML = viewCatalogue;
+    const btnName = divElement.querySelector('#btnOk');
+    btnName.addEventListener('click', () => {
+        const input = document.getElementById('inputTexto').value;
+        const infoname = document.getElementById('cliente');
+        infoname.innerHTML = `Cliente: ${input}`; 
 
-    
+    })
+
     const desayuno = divElement.querySelector('#btnDesayuno');
     desayuno.addEventListener('click', () => {
         const box = document.getElementById('containerCentral');
         box.innerHTML = '';
-
         verDataFb('Desayuno')
             .then((snapshot) => {
                 snapshot.docs.forEach(doc => {
-                    box.innerHTML += `<button class="btnProducto" data-set="${doc.id}">
-                    <p>${doc.data().producto}</p>
-                    <p>${doc.data().precio}</p>
-                    <img class="fotoDesayuno" src="${doc.data().img}">
-                    </button>`;
+                    box.appendChild(templates(doc));
                 });
                 
             })
             .catch(()=> console.log('error'));
-    
-        })
-        const almuerzo = divElement.querySelector('#btnAlmuerzo');
-        almuerzo.addEventListener('click', () => {
-            const box = document.getElementById('containerCentral');
-            box.innerHTML = '';
-        verDataFb('Menú')
-        .then((snapshot) => {
-            snapshot.docs.forEach(doc => {
-                box.innerHTML += `<button class="btnProducto" data-set="${doc.id}">
-                <p>${doc.data().producto}</p>
-                <p>$${doc.data().precio}</p>
-                
-                <p>${doc.data().Sabores && doc.data().Sabores.map((elem) => `<p>${elem.producto}</p>`)}</p>
-                <img class="fotoDesayuno" src="${doc.data().img}">
-                </button>`;    
-                }
-            ); 
-        })
-        .catch(()=> console.log('error'));
     })
+    const almuerzo = divElement.querySelector('#btnAlmuerzo');
+    almuerzo.addEventListener('click', () => {
+        const box = document.getElementById('containerCentral');
+        box.innerHTML = '';
+        verDataFb('Menú')
+            .then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    box.appendChild(templates(doc));
+                    
+                }); 
+            })
+            .catch(()=> console.log('error'));
+    })
+
+    
     return divElement;
 };
