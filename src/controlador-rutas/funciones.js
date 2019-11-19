@@ -1,9 +1,9 @@
 import { templateOrders, templateTotal} from "../controlador-rutas/tabla.js";
 import {adicionales} from '../controlador-rutas/adicionales.js'
-export let arr = [];
+
 
 export const templateProducts = (doc) => {
-
+   let arr = [];
     const btnProducts = document.createElement('button');
     btnProducts.className = 'btnProducto';
     btnProducts.setAttribute('data-id', doc.id);
@@ -54,7 +54,7 @@ export const templateProducts = (doc) => {
     return btnProducts;
 };
 
-export const arrProducto  =  (localStorage.getItem(arr) ? JSON.parse(localStorage.getItem(arr)) : []);
+export const arrProducto  =string =>  (localStorage.getItem(string) ? JSON.parse(localStorage.getItem(string)) : []);
 
 
 

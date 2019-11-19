@@ -250,7 +250,7 @@ h3 {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    background-image: url(../img/iconopedido.png);
+    background-image: url(../img/ver-pedidos.png);
     background-size: contain;
     background-position: right;
     background-repeat: no-repeat;
@@ -277,8 +277,9 @@ h3 {
 
 #tblDatos,
 #cliente {
-    justify-content: space-between;
-    flex-flow: column;
+    margin-left: 4rem;
+    font-size: 115%;
+   
 }
 
 th,
@@ -302,6 +303,8 @@ td#cantidad {
     border: none;
     border-bottom: 1px solid #eee;
     width: 350px;
+    font-size: 2rem;
+    color: #eee;
 }
 
 #btnOk {
