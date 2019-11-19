@@ -1,9 +1,9 @@
 import { templateOrders, templateTotal} from "../controlador-rutas/tabla.js";
 import {adicionales} from '../controlador-rutas/adicionales.js'
-
+let arr = [];
 
 export const templateProducts = (doc) => {
-   let arr = [];
+   
     const btnProducts = document.createElement('button');
     btnProducts.className = 'btnProducto';
     btnProducts.setAttribute('data-id', doc.id);
@@ -22,6 +22,7 @@ export const templateProducts = (doc) => {
  //--------BOTONES PRODUCTOS 
 
  btnProducts.addEventListener('click', (e) => {
+    
         const obj = {
             id: doc.id,
             producto: doc.data().producto,
@@ -34,18 +35,20 @@ export const templateProducts = (doc) => {
        adicionales(doc, e.target);
  
         } else if (!metodoFind) {
+            document.querySelector('#containerTabla').innerHTML = '';
+
             arr.push(obj);
-
-         
-            templateOrders(obj);
-         
-
-            templateTotal(obj);
+         templateOrders(obj);
+         templateTotal(obj);
+         metodoFind.cantidad++;
         } else {
-
             metodoFind.cantidad++;
-            templateOrders(metodoFind)
-            templateTotal(metodoFind);
+            document.querySelector('#containerTabla').innerHTML = '';
+            arrProducto('ordenes').forEach(element => {
+                templateOrders(element);
+                templateTotal(element);
+            });
+         
         }
             localStorage.setItem('ordenes', JSON.stringify(arr));
          
