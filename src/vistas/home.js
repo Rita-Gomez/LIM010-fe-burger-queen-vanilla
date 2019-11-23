@@ -7,7 +7,7 @@ export default () => {
             <p class="containerParrafo">Somos Burguer Queen, una cadena de comidas a las 24 hrs.</p>
             <div class="linkNext">
             <a href="#/mesero" class="btnMesero"><span class="spanMesero">Mesero</span></a>
-            <a href="#" class="btnCocinero"><span class="spanCocinero">Cocinero</span></a>
+            <a href="#/cocinero" class="btnCocinero"><span class="spanCocinero">Cocinero</span></a>
             </div>
         </div>
     </section>

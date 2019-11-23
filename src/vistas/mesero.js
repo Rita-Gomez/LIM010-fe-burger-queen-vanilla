@@ -1,8 +1,7 @@
 import { verDataFb } from "../controlador-firebase/controlador-fb.js";
-import { templates } from "../controlador-rutas/productos.js";
-
+import { templateProducts } from "../controlador-rutas/funciones.js";
 export default () => {
-    const viewCatalogue = `
+  const viewCatalogue = `
   <section id="perifericoDerecho">
         <div class="nuevoGrupo">
             <div class="childGrupo">
@@ -11,11 +10,11 @@ export default () => {
                     <div id="imagenMenu"><img src="./img/menu.png"/></div>
                     <div class="linkFoods">
                         <div class="botonName">
-                            <input type="text" id="nombre-cliente"class="inputTexto" placeholder="Nombre cliente">
+                            <input type="text" class="inputTexto" id="inputTexto" placeholder="Nombre cliente">
                             <button id="btnOk">→</button>
                         </div>
-                        <button id="btnDesayuno" class="breakfast">Desayuno</button>
-                        <button id="btnAlmuerzo" class="lunch">Almuerzo y Cena</button>
+                        <div class="mediaButtons"><button id="btnDesayuno" class="breakfast">Desayuno</button>
+                        <button id="btnAlmuerzo" class="lunch">Almuerzo y Cena</button></div>
                     </div>
                 </div>
             </div>
@@ -25,56 +24,70 @@ export default () => {
         <div id="containerCentral"></div>
     </section>
     <section id="perifericoIzquierdo">
-        <div class="nuevoFlex">
-            <div class="childFlex">
-                <a href="#" class="verListado">Ver Pedidos</a>
-                <div id="containerExtremoIzquierdo">
-                    <h2 id="cliente">Cliente :<p id="push-nombre"></p></h2>
-                    <table id="tblDatos">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Precio</th>
-
-                            </tr>
-                        </thead>
-                        <tbody id="contenedor-tabla">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+      <div class="nuevoFlex">
+        <div class="childFlex">
+          <div class="linkTwo">
+          <a href="#/cocinero" class="verListado"></a>
+          <a href="#/delivery" class="verEntrega"></a>
+          </div>
+          <div id="containerExtremoIzquierdo">
+            <h2 id="cliente">Cliente : </h2>
+            <table id="tblDatos">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody id="containerTabla">
+                </tbody>
+                <tfoot id="total">
+                </tfoot>
+            </table>
+          </div>
         </div>
+      </div>
     </section>`;
 
-    const divElement = document.createElement('section');
-    divElement.className = "body";
-    divElement.innerHTML = viewCatalogue;
+  const divElement = document.createElement('section');
+  divElement.className = "body";
+  divElement.innerHTML = viewCatalogue;
+  const btnName = divElement.querySelector('#btnOk');
+  btnName.addEventListener('click', () => {
+    const input = document.getElementById('inputTexto').value;
+    const infoname = document.getElementById('cliente');
+    infoname.innerHTML = `Cliente: ${input}`;
 
-    const desayuno = divElement.querySelector('#btnDesayuno');
-    desayuno.addEventListener('click', () => {
-        const box = document.getElementById('containerCentral');
-        box.innerHTML = '';
-        verDataFb('Desayuno')
-        .then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                      box.appendChild(templates(doc));
-                });
-            })
-            .catch(()=> console.log('error'));
-        })
-     
-        const almuerzo = divElement.querySelector('#btnAlmuerzo');
-        almuerzo.addEventListener('click', () => {
-            const box = document.getElementById('containerCentral');
-            box.innerHTML= '';
-            verDataFb('Menú')
-        .then((snapshot) => {
-            snapshot.docs.forEach(doc => {
-              box.appendChild(templates(doc));    
-                }
-            ); 
-        })
-        .catch(()=> console.log('error'));
-    })
-    return divElement;
+  })
+
+  const desayuno = divElement.querySelector('#btnDesayuno');
+  desayuno.addEventListener('click', () => {
+    const box = document.getElementById('containerCentral');
+    box.innerHTML = '';
+    verDataFb('Desayuno')
+      .then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+          box.appendChild(templateProducts(doc));
+        });
+
+      })
+      .catch(() => console.log('error'));
+  })
+  const almuerzo = divElement.querySelector('#btnAlmuerzo');
+  almuerzo.addEventListener('click', () => {
+    const box = document.getElementById('containerCentral');
+    box.innerHTML = '';
+    verDataFb('Menú')
+      .then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+          box.appendChild(templateProducts(doc));
+
+        });
+      })
+      .catch(() => console.log('error'));
+  })
+
+
+  return divElement;
 };

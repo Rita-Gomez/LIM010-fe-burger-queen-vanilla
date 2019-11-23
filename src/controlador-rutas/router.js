@@ -1,4 +1,8 @@
-import { components } from '../controlador-rutas/index.js';
+import { components } from '../vistas/index.js';
+
+
+
+
 export const changeTmp = (hash) => {
     const sectionMain = document.getElementById('container');
     sectionMain.innerHTML = '';
@@ -9,8 +13,11 @@ export const changeTmp = (hash) => {
         case '#/mesero': 
         sectionMain.appendChild(components.mesero());
         break;
-        case '#/cocinero': 
+        case '#/cocinero':
         sectionMain.appendChild(components.cocinero());
+        break;
+        case '#/delivery': 
+        sectionMain.appendChild(components.delivery());
         break;
         default:
         sectionMain.appendChild(components.different());
