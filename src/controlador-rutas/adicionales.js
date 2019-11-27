@@ -1,8 +1,8 @@
 import {templateTotal, templateOrders} from '../controlador-rutas/tabla.js'
-// import {arr} from '../controlador-rutas/funciones.js'
+ import {arr} from '../controlador-rutas/funciones.js'
 
 
-let obj = {
+ export let obj = {
   sabor: null,
   adicional: []
 };
@@ -69,15 +69,16 @@ const btnAdicional = containerBurger.querySelectorAll('.adicional');
         precio:parseInt(doc.data().precio),
         cantidad: 1,
         sabor : obj.sabor,
-        adicional: obj.adicional
+        adicional: obj.adicional,
+       
     }
   
     nuevoObj.precio = parseInt(doc.data().precio) + nuevoObj.adicional.length ;
     console.log(nuevoObj, 'pedido')
-    // arr.push(nuevoObj);
+    arr.push(nuevoObj);
     templateOrders(nuevoObj);
     templateTotal(nuevoObj);
-    // obj.adicional=[]
+    obj.adicional=[]
     // console.log(obj.adicional)
     
 

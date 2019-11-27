@@ -30,7 +30,7 @@ export default () => {
     <section id="perifericoIzquierdo">
       <div class="nuevoFlex">
         <div class="childFlex">
-          <a href="#" class="verListado"></a>
+          <a href="#/cocinero" class="verListado"></a>
           <div id="containerExtremoIzquierdo">
             <h2 id="cliente">Cliente : </h2>
             <table id="tblDatos">
