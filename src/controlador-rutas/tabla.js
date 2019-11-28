@@ -1,8 +1,8 @@
 // import {   getPosts } from "../controlador-rutas/funciones.js";
 import { guardarPedidos} from '../controlador-firebase/controlador-fb.js'
-import { arrProducto, extraInfoLs } from '../controlador-rutas/funciones.js'
+import { arrProducto} from '../controlador-rutas/funciones.js'
 let sumaTotal = 0
-//, guardarFecha
+
 
 export const templateOrders = (doc) => {
   const templateOrdersPrint = document.createElement('tr');
@@ -49,15 +49,7 @@ export const templateTotal = () => {
   const btnEnviar = templateTotalPrint.querySelector('.btnEnviar');
   btnEnviar.addEventListener('click',()=>{
   
-    const arrOrders = arrProducto('ordenes')
-    // const showTime = () => {
-    //   const fecha = new Date;
-    //   const hour = fecha.getHours()
-    //   const minutes = fecha.getMinutes()
-    //   const seconds = fecha.getSeconds()
-    //   const prinTime = hour + ':' + minutes + ':' + seconds ;
-    //   return prinTime;
-    // }
+
      const hours = firebase.firestore.FieldValue.serverTimestamp();
     
     // const fecha = moment().format('LTS');
@@ -75,9 +67,9 @@ export const templateTotal = () => {
     containerOrders.innerHTML = '';
     const containerTotal = document.querySelector('#total');
     containerTotal.innerHTML = '';
-    // const deleteArr = arrProducto.splice(0,arrProducto.length);
+  arrProducto.splice(0,arrProducto.length);
    
-  //  localStorage.removeItem('ordenes');
+   localStorage.removeItem('ordenes');
   })
 
 }

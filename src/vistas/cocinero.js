@@ -13,8 +13,7 @@ export default () => {
   divElement.innerHTML = viewAccesories;
   const btnCocinero = divElement.querySelector('#buttonViewOrders')
   btnCocinero.addEventListener('click', () => {
-    const containerGeneral = divElement.querySelector('#containerGeneral');
-    containerGeneral.innerHTML = '';
+   
 
     getOrders("Pedidos")
       .then((querySnapshot) => {

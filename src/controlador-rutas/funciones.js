@@ -45,9 +45,10 @@ export const templateProducts = (doc) => {
             templateTotal(obj);
             localStorage.setItem('ExtraInfo', JSON.stringify(extraInfo))
         } else {
-            metodoFind.cantidad++;
+         
             document.querySelector('#containerTabla').innerHTML = '';
                 arrProducto('ordenes').forEach(element => {
+                    element.cantidad++;
                 templateOrders(element);
                 templateTotal(element);
                 localStorage.setItem('ExtraInfo', JSON.stringify(extraInfo))
@@ -65,6 +66,5 @@ export const templateProducts = (doc) => {
     return btnProducts;
 };
 export const arrProducto = string => (localStorage.getItem(string) ? JSON.parse(localStorage.getItem(string)) : []);
-export const extraInfoLs = string => (localStorage.getItem(string) ? JSON.parse(localStorage.getItem(string)) : []);
 
-export const getPosts = () => JSON.parse(localStorage.getItem('ordenes', JSON.stringify({ arr })));
+// export const getPosts = () => JSON.parse(localStorage.getItem('ordenes', JSON.stringify({ arr })));
